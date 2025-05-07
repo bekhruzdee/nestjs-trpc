@@ -15,6 +15,27 @@ const appRouter = t.router({
         rating: z.number().optional(),
       }),
     })).query(async () => "PLACEHOLDER_DO_NOT_REMOVE" as any),
+    getAllProducts: publicProcedure.output(z.array(z.object({
+      id: z.string(),
+      name: z.string(),
+      price: z.number(),
+      details: z.object({
+        description: z.string().optional(),
+        rating: z.number().optional(),
+      }),
+    }))).query(async () => "PLACEHOLDER_DO_NOT_REMOVE" as any),
+    updateProduct: publicProcedure.input(z.object({
+      id: z.string(),
+      data: z.object({
+        id: z.string(),
+        name: z.string(),
+        price: z.number(),
+        details: z.object({
+          description: z.string().optional(),
+          rating: z.number().optional(),
+        }),
+      }).partial(),
+    })).mutation(async () => "PLACEHOLDER_DO_NOT_REMOVE" as any),
     createProduct: publicProcedure.input(z.object({
       id: z.string(),
       name: z.string(),
@@ -31,7 +52,8 @@ const appRouter = t.router({
         description: z.string().optional(),
         rating: z.number().optional(),
       }),
-    })).mutation(async () => "PLACEHOLDER_DO_NOT_REMOVE" as any)
+    })).mutation(async () => "PLACEHOLDER_DO_NOT_REMOVE" as any),
+    deleteProduct: publicProcedure.input(z.object({ id: z.string() })).output(z.boolean()).mutation(async () => "PLACEHOLDER_DO_NOT_REMOVE" as any)
   })
 });
 export type AppRouter = typeof appRouter;
