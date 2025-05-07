@@ -56,6 +56,7 @@ export class ProductsService {
     return product;
   }
 
+  
   getAllProducts() {
     try {
       return {
